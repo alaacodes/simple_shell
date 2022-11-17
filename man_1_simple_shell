@@ -1,147 +1,132 @@
-.\" simple_shell man page
-.\"
-.\"
-.TH simple_shell 1 "17 November 2022" "Alx students simple_shell"
-
-
+.TH hsh 1 "April  14 , 2021" "1.0" "hsh General Commands Manual"
 
 .SH NAME
 
-.B simple_shell (hsh)
-- command interpreter (shell)
-
+.B simple_shell - hsh
+- command line interpreter or shell
 
 
 .SH SYNOPSIS
 
-.B	./hsh
-
-
-
-.SH COPYRIGHT
-
-simple_shell is Public Domain, no copyright protection
+.B  ./hsh
+.I (no options yet)
 
 
 
 .SH DESCRIPTION
 
-simple_shell replicates a command line interpreter (a shell), which is a user \
-interface program for access to an operating system's services.  This shell \
-is designed to interact with a linux distribution or unix like system that \
-uses linux system calls and other commands found in the linux PATH, for \
-example, the
-.B $PATH:
-.P
-.RS
-.B /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
-.P
-.RE
-simple_shell has a set of custom built-in commands, and also integrates with other \
-commands located in the system's PATH.  The output is designed to exactly or \
-as close as possible replicate the shell 'sh' or 'dash'
-.B $ man dash
-.  simple_shell \
-takes commands from files, shell scripts or user input in either an \
-interactive or non-interactive mode (explained in INVOCATION section).
+simple_shell is a command line interpreter, or shell, in the tradition of the first Unix shell written by Ken Thompson. This shell is intentionally minimalistic, yet includes the basic functionality of a traditional Unix-like command line interface. simple_shell is desgined to run on the linux environment.
 
 
+.SH OVERVIEW
+
+Reading from either the terminal or files, simple_shell interprets and executes commands.
 
 
 .SH INVOCATION
 
-to initialize simple_shell, you must compile all the included files using the GNU \
-compiler collection: gcc.  Then run the output file, with a command such as \
-this: $ ./a.out.  simple_shell has been written to pass all of these warning checks \
-and was designed to be compiled with the following command:
+Compile simple_shell with the GNU Compiler Collection, preferably using gcc plus the below specified flags, as per this example (note the use of the * wildcard which enables all related .c files to be compiled concurrently):
 .P
 .RS
 .B $ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 .P
 .RE
-if simple_shell is executed, it will initialize in what is considered 'interactive \
-mode.'  In this scenario, the user is prompted for a command and then the \
-command is executed after the newline or 'enter' is input.  simple_shell can also \
-function in non-interactive mode by using shell scripts, such as a '|' before
-the simple_shell executable file ('hsh').  This is an example:
+simple_shell can be run in interactive mode by entering the below command on the command line followd by "enter." Note that the prompt ('$') will appear and you will then be in interactive mode and able to enter commands followed by "enter."
 .P
 .RS
-.B $ echo 'ls' | ./hsh
+.B $ ./hsh
 .P
 .RE
-Commands may also be input into simple_shell through a file containing commands:
+simple_shell can be run in non-interactive mode through the use of shell scripts. This can involve the use of piping ('|'):
 .P
 .RS
-.B $ cat aFile | ./hsh
-.P
-.RE
+.B echo 'pwd' | ./hsh
 
+.SH EXECUTABLES
 
-
-.SH OPTIONS
-
-simple_shell does not take any options but does utilize the variable extern char \
-**environ.  This is currently part of the future goals of simple_shell
-
-
-.SS BUILT-IN COMMANDS
-
+Example of executables:
+.IP
+.br
+.\&
 .RS
-This secion has information on the included builtin commands with simple_shell
+\&$ echo "Example of executables"
+.br
+\&"Example of executables"
+.br
+\&$
 
-.Bl -tag -width "PAGEIN" -compact -offset indent
 
-.It
+.SH BUILTINS
+
+The following builtin commands are supported:
+
+.IT
 .B env
-- writes environment to stdout
+- prints the environment variables
 
-.IT
-.B setenv
-- sets or changes an environmental variable. example: 'setenv USER=bobby'
-
-.IT
-.B unsetenv
-- removes environmental variable. example: 'unsetenv USER'
-
-.IT
-.B history
-- writes history to stdout
-
-
-.IT
 .B exit
-- exits simple_shell
+- exits the program
 
-.IT
-.B cd
-- changes working directory
+.B setenv
+- sets the environment
 
-.IT
-.B help
-- used with another command prints help message.  example: 'help env'
+.B unsetenv
+- removes elements from the environment
 
-.IT
-.B alias
-- creates an alias.  example 'alias ll='ls -la''
-
-.IT
-.B unalias
-- removes an alias.  example 'unalias ll'
-.RE
-
-
-.SH "SEE ALSO"
-
-.BR sh (1),
-.BR bash (1),
-
+Example of builtin command:
+.IP
+.br
+.\&
+.RS
+\&$ env
+.br
+\&TERM=xterm-256color
+.br
+\&SHELL=/bin/bash
+.br
+\&SSH_CLIENT=10.0.2.2 50046 22
+.br
+\&OLDPWD=/home/vagrant
+.br
+\&SSH_TTY=/dev/pts/0
+.br
+\&LC_ALL=en_US
+.br
+\&USER=vagrant
+.br
+\&MAIL=/var/mail/vagrant
+.br
+\&PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+.br
+\&PWD=/home/vagrant/simple_shell
+.br
+\&LANG=en_US.UTF-8
+.br
+\&SHLVL=1
+.br
+\&HOME=/home/vagrant
+.br
+\&LOGNAME=vagrant
+.br
+\&SSH_CONNECTION=10.0.2.2 50046 10.0.2.15 22
+.br
+\&LESSOPEN=| /usr/bin/lesspipe %s
+.br
+\&LESSCLOSE=/usr/bin/lesspipe %s %s
+br.
+\&_=./hsh
+.br
+\&$
 
 
 .SH BUGS
-
-none known.  simple_shell does not currently replicate these tasks:
+No known bugs at this writing (November 17, 2022).
+Please report any issues to the authors.
 
 .SH AUTHOR
 
 Al-amin Ahmed <alaminalaa21@gmail.com>
 Daniel Addotey <addoteyd@gmail.com>
+
+.SH SEE ALSO
+sh
